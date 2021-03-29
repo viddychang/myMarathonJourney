@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Link, useParams, useHistory} from "react-router-dom";
-import marathonService from "../services/marathon-service"
+import marathonService from "../../services/marathon-service"
 
 const SearchScreen = () => {
     const history = useHistory()
