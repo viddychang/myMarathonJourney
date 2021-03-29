@@ -1,6 +1,6 @@
 const findMarathonsByName = (n) => {
     return fetch(
-        `https://runsignup.com/rest/races?format=json&api_key=Me9AhLY9kvuc2GAKyRtFckMGy9nZVzXI&api_secret=oqqWWM6kf3iB9GuxcemQSdYRZu9cRBQk&name=${n}`)
+        `https://hidden-mountain-72737.herokuapp.com/https://runsignup.com/rest/races?format=json&api_key=Me9AhLY9kvuc2GAKyRtFckMGy9nZVzXI&api_secret=oqqWWM6kf3iB9GuxcemQSdYRZu9cRBQk&name=${n}`)
         .then(response => response.json())
 }
 
@@ -9,6 +9,7 @@ const findMarathonsByState = (s) => {
     return fetch(
         `https://runsignup.com/rest/races?format=json&api_key=Me9AhLY9kvuc2GAKyRtFckMGy9nZVzXI&api_secret=oqqWWM6kf3iB9GuxcemQSdYRZu9cRBQk&state=${s}`)
         .then(response => response.json())
+        
 }
 
 const findMarathonById = (id) => {
