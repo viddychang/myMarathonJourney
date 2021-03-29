@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useHistory, useParams} from 'react-router-dom'
-import marathonService from '../services/marathon-service'
+import marathonService from '../../services/marathon-service'
 
 const DetailsScreen = () => {
     const {race_id} = useParams()
