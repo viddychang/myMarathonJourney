@@ -1,5 +1,5 @@
-import SearchScreen from "./components/search-screen";
-import DetailsScreen from "./components/details-screen";
+import SearchScreen from "./components/search/search-screen";
+import DetailsScreen from "./components/search/details-screen";
 import {BrowserRouter, Route} from "react-router-dom";
 import HomeScreen from "./components/home-screen";
 
