@@ -12,6 +12,18 @@ const HomeScreen = () => {
             <Link to="/details">
                 Details
             </Link>
+            <br/>
+            <Link to="/register">
+                Register
+            </Link>
+            <br/>
+            <Link to="/login">
+                Login 
+            </Link>
+            <br/>
+            <Link to="/profile">
+                Profile
+            </Link>
         </div>
     )
 }
