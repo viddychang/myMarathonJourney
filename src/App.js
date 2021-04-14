@@ -1,5 +1,5 @@
 import SearchScreen from "./components/search-page/search-screen";
-import DetailsScreen from "./components/search-page/details-screen";
+import DetailsScreen from "./components/search-page/details-page/details-screen";
 import {BrowserRouter, Route} from "react-router-dom";
 import HomeScreen from "./components/home-screen";
 import Register from "./components/login-register-page/register-page";
