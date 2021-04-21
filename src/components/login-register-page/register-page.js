@@ -3,19 +3,22 @@ import {Link, useHistory} from "react-router-dom";
 import userService from '../../services/user-service'
 
 const Register = () => {
-    const [creds, setCreds] = useState({userName: '', password: '', role: ''}) 
+    const [creds, setCreds] = useState({userName: '', password: '', role: 'COMMUNITY'}) 
     const [tempPW, setTempPW] = useState('');
     const history = useHistory()
     const register = () => {
         console.log(creds)
         if (tempPW === creds.password) { 
+            
+
             userService.registerUser(creds)
                 .then((user) => {
                     console.log(user)
+                    const userId = user.id
                     if(user === 0) {
                         alert("username already taken")
                     } else {
-                        history.push("/profile")
+                        history.push("/profile/:userId")
                     }
                 })
         }
@@ -76,8 +79,8 @@ const Register = () => {
                     <div className="col-sm-10">
                         <select className="custom-select" name="chooseRole" id="chooseRole"
                                 onChange={(event) => setCreds({...creds, role: event.target.value})}>
+                            <option value="COMMUNITY" selected>Community</option>
                             <option value="ADMINISTRATOR">Administrator</option>
-                            <option value="COMMUNITY">Community</option>
                         </select>
                     </div>
                 </div>
