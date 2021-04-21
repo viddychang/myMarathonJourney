@@ -14,7 +14,7 @@ const Register = () => {
             userService.registerUser(creds)
                 .then((user) => {
                     console.log(user)
-                    const userId = user.id
+                    const userId = user.userId
                     if(user === 0) {
                         alert("username already taken")
                     } else {
