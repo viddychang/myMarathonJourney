@@ -21,10 +21,6 @@ const Profile = () => {
     <div class="container">
         <h1>Profile</h1>
 
-        <div class="alert alert-success" role="alert">
-            Profile successfully saved!
-        </div>
-
         <div class="mb-3 row">
             <label for="username"
                    class="col-sm-2 col-form-label">

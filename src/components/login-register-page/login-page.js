@@ -6,26 +6,26 @@ import userService from '../../services/user-service';
 
 
 const Login = () => {
-    const [creds, setCreds] = useState({username: '', password:''});
+    const [creds, setCreds] = useState({userName: '', password:''});
     const history = useHistory();
 
     const login = () => {
-        userService.login(creds)
+        console.log(creds)
+        userService.loginUser(creds)
             .then((user) => {
                 console.log(user)
+                const userId = user.userId
                 if(user === 0) {
                     alert("login failed, try again")
                 } else {
-                    history.push("/profile")
+                    history.push(`/profile/${userId}`)
                 }
             })
-        history.push("/profile")
     }
 
     return (
     <div className="container">
         <h1>Sign In</h1>
-        <form>
             <div className="form-group row">
                 <label for="username" className="col-sm-2 col-form-label">
                     Username </label>
@@ -33,7 +33,7 @@ const Login = () => {
                     <input className="form-control"
                         id="username"
                         placeholder="Enter your username here."
-                        onChange={(event) => setCreds({...creds, username: event.target.value})}/>
+                        onChange={(event) => setCreds({...creds, userName: event.target.value})}/>
                 </div>
             </div>
             <div className="form-group row">
@@ -60,7 +60,6 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </form>
     </div>
 
 
