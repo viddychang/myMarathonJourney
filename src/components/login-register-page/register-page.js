@@ -1,22 +1,44 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import userService from '../../services/user-service'
 
 const Register = () => {
-    const [password, setPassword] = useState('');
-    const [tempPassword, setTempPassword] = useState('');
-    const [userName, setUserName] = useState('');
-    const [role, setRole] = useState('');
+    const [creds, setCreds] = useState({userName: '', password: '', role: ''}) 
+    const [tempPW, setTempPW] = useState('');
+    const history = useHistory()
+    const register = () => {
+        console.log(creds)
+        if (tempPW === creds.password) { 
+            userService.registerUser(creds)
+                .then((user) => {
+                    console.log(user)
+                    if(user === 0) {
+                        alert("username already taken")
+                    } else {
+                        history.push("/profile")
+                    }
+                })
+        }
+        
+    }
 
-    /*
-    TODO: figure out how to verify password inputs match
+    const [error, setError] = useState('');
 
-    */
+    const validatePassword = (temp) => {
+        if (temp !== creds.password) {
+            setError("Passwords do not match.")
+        }
+        else {
+            setError('')
+        }
+        // console.log(creds.password)
+        // console.log(temp)
+    }
 
     return (
         <div className="container">
             <h1>New User Registration</h1>
-
-            <form>
+            
                 <div className="form-group row">
                     <label for="username" className="col-sm-2 col-form-label">
                         Username </label>
@@ -24,7 +46,7 @@ const Register = () => {
                         <input className="form-control"
                             id="username"
                             placeholder="Enter a username."
-                            onChange={(event) => setUserName(event.target.value)}/>
+                            onChange={(event) => setCreds({...creds, userName: event.target.value})}/>
                     </div>
                 </div>
                 <div className="form-group row">
@@ -33,7 +55,7 @@ const Register = () => {
                     <div className="col-sm-10">
                         <input type="password" className="form-control"
                             id="password" placeholder="Enter a password."
-                            onChange={(event) => setPassword(event.target.value)}/>
+                            onChange={(event) => setCreds({...creds, password: event.target.value})}/>
                     </div>
                 </div>
                 <div className="form-group row">
@@ -42,7 +64,10 @@ const Register = () => {
                     <div className="col-sm-10">
                         <input type="password" className="form-control"
                             id="passwordVerify" placeholder="Verify your password."
-                            onChange={(event) => setTempPassword(event.target.value)}/>
+                            onChange={(event) => {setTempPW(event.target.value)
+                                                    validatePassword(event.target.value)}}/>
+                        <div className="text-danger">{error}</div>
+
                     </div>
                 </div>
                 <div className="form-group row">
@@ -50,7 +75,7 @@ const Register = () => {
                         Choose a role</label>
                     <div className="col-sm-10">
                         <select className="custom-select" name="chooseRole" id="chooseRole"
-                                onChange={(event) => setRole(event.target.value)}>
+                                onChange={(event) => setCreds({...creds, role: event.target.value})}>
                             <option value="ADMINISTRATOR">Administrator</option>
                             <option value="COMMUNITY">Community</option>
                         </select>
@@ -59,11 +84,11 @@ const Register = () => {
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label"></label>
                     <div className="col-sm-10">
-                        <button className="btn btn-primary btn-block" formaction={`/profile`}>Sign Up</button>
+                        <button className="btn btn-primary btn-block" onClick={register}>Sign Up</button>
                         <button className="btn btn-danger btn-block" formaction={"/"}>Cancel</button>
                     </div>
                 </div>
-            </form>
+            
         </div>
     )
 
