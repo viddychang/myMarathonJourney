@@ -1,8 +1,22 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link} from "react-router-dom";
 import '../styles.css';
+import userService from '../../services/user-service'
 
 const Profile = () => {
+    const [currentUser, setCurrentUser] = useState()
+    const [privateMode, setPrivateMode] = useState()
+
+    useEffect(() => {
+        userService.getCurrentUserProfile()
+            .then((user) => {
+                if (user !== null) {
+                    setCurrentUser(user)
+                }
+            })
+    })
+
+
     return(
     <div class="container">
         <h1>Profile</h1>
