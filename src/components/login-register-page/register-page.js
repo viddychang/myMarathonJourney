@@ -18,6 +18,8 @@ const Register = () => {
                     if(user === 0) {
                         alert("username already taken")
                     } else {
+                        
+                        userService.loginUser()
                         history.push(`/profile/${userId}`)
                     }
                 })
