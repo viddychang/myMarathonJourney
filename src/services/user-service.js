@@ -3,7 +3,10 @@ const USER_API = "https://wbdv-sp21-dc-project-server.herokuapp.com/api";
 const getCurrentUser = () => {
     return fetch(`${USER_API}/users/profile`, {
         method: "GET",
-        credentials: "include"
+        credentials: "include",
+        headers: {
+            'content-type': 'application/json'
+        }
     }).then(response => response.json())
 }
 
