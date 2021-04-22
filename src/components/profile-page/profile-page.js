@@ -23,6 +23,12 @@ const Profile = () => {
     useEffect(() => {
         console.log('hi')
         userService.getCurrentUser()
+            .then(response => response.json())
+
+            .catch(error => {
+                console.log(error);
+            })
+            
             .then((user) => {
                 console.log(user)
                 if (user !== null) {
