@@ -18,7 +18,7 @@ const Login = () => {
                 if(user === 0) {
                     alert("login failed, try again")
                 } else {
-                    history.push(`/profile/${userId}`)
+                    history.push(`/profile`)
                 }
             })
     }
