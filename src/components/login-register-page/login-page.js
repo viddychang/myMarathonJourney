@@ -19,6 +19,8 @@ const Login = () => {
                     if(existingUser) {
                         history.push("/profile")
                     }
+                }
+                )
                 })
     }
 
