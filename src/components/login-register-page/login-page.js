@@ -10,7 +10,7 @@ const Login = () => {
     const history = useHistory();
 
     const login = () => {
-        userService.login(creds)
+        userService.loginUser(creds)
             .then((user) => {
                 console.log(user)
                 if(user === 0) {
