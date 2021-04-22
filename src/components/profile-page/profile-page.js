@@ -21,6 +21,7 @@ const Profile = () => {
     const [role, setRole] = useState()
 
     useEffect(() => {
+        console.log('hi')
         userService.getCurrentUser()
         .then((user) => {
             console.log(user)
