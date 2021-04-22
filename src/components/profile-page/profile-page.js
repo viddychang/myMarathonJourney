@@ -1,104 +1,74 @@
 import React, {useState, useEffect} from 'react'
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import '../styles.css';
 import userService from '../../services/user-service'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PrivateDetails from './private-details';
+
 
 const Profile = () => {
-    const [currentUser, setCurrentUser] = useState()
+    const {profileId} = useParams()
     const [privateMode, setPrivateMode] = useState()
+    const [currentLoginUser, setCurrentLoginUser] = useState()
+
+    const [userName, setUserName] = useState()
+    const [userBio, setUserBio] = useState()
+    const [password, setPassword] = useState()
+    const [firstName, setFirstName] = useState()
+    const [lastName, setLastName] = useState()
+    const [dOB, setDOB] = useState()
+    const [role, setRole] = useState()
 
     useEffect(() => {
-        userService.getCurrentUserProfile()
-            .then((user) => {
-                if (user !== null) {
-                    setCurrentUser(user)
-                }
+        userService.getCurrentUser()
+        .then((user) => {
+            console.log(user)
+            if (user !== null) {
+                setCurrentLoginUser(user)
+            }
+        })
+        
+        userService.findUserByUserId(profileId)
+            .then((userData) => {
+                console.log(userData)
+                setUserName(userData.userName)
+                setPassword(userData.password)
+                setFirstName(userData.firstName)
+                setLastName(userData.lastName)
+                setDOB(userData.dateOfBirth)
+                setUserBio(userData.userBiography)
+                setRole(userData.role)
             })
-    })
-
+    }, [profileId])
 
     return(
     <div class="container">
-        <h1>Profile</h1>
-
-        <div class="mb-3 row">
-            <label for="username"
-                   class="col-sm-2 col-form-label">
-                Username
-            </label>
-            <div class="col-sm-10">
-                <input type="text"
-                       placeholder="dchang"
-                       title="This is your username to login. This cannot be modified."
-                       class="form-control"
-                       id="username"
-                        readonly/>
+        <h1>{userName}'s Marathon Journey</h1>
+        <div >
+            {
+        currentLoginUser !== undefined && currentLoginUser.userId === profileId &&
+        <PrivateDetails 
+            userName={userName}
+            password={password}
+            userBio={userBio}
+            firstName={firstName}
+            lastName={lastName}
+            role={role}
+            dOB={dOB}
+            setDOB={setDOB}
+            setPassword={setPassword}
+            setUserBio={setUserBio}
+            setFirstName={setFirstName}
+            setLastName={setLastName}
+            setRole={setRole}
+            profileId={profileId}
+            currentLoginUser={currentLoginUser}
+            
+            />
+        } 
             </div>
-        </div>
-
-
-        <div class="mb-3 row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">
-                Password
-            </label>
-            <div class="col-sm-10">
-                <input type="password"
-                       class="form-control"
-                       id="inputPassword"/>
-            </div>
-        </div>
-
-        <div class="mb-3 row">
-            <label for="email" class="col-sm-2 col-form-label">
-                Email
-            </label>
-            <div class="col-sm-10">
-                <input type="email"
-                       class="form-control"
-                       id="email"/>
-            </div>
-        </div>
-
-        <div class="mb-3 row">
-            <label for="role" class="col-sm-2 col-form-label">
-                Role
-            </label>
-            <div class="col-sm-10">
-                <select id="role" class="form-control">
-                    <option>Faculty</option>
-                    <option>Student</option>
-                    <option>Admin</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="mb-3 row">
-            <label for="dob" class="col-sm-2 col-form-label">
-                Date of Birth
-            </label>
-            <div class="col-sm-10">
-                <input type="date"
-                       value="2345-12-20"
-                       class="form-control"
-                       id="dob"/>
-            </div>
-        </div>
-
-        <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">
-
-            </label>
-
-            <div class="col-sm-10">
-                <a class="btn btn-success btn-block" href="#">
-                    Update
-                </a>
-
-                <a class="btn btn-danger btn-block" href="../index.html">
-                    Logout
-                </a>
-            </div>
-        </div>
+            
     </div>
     )
 }

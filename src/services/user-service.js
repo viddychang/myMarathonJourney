@@ -1,6 +1,6 @@
 const USER_API = "https://wbdv-sp21-dc-project-server.herokuapp.com/api";
 
-const getCurrentUserProfile = () => {
+const getCurrentUser = () => {
     return fetch(`${USER_API}/users/profile`, {
         method: "POST",
         credentials: "include"
@@ -42,7 +42,7 @@ const getAllUsers = () => {
 }
 
 const findUserByUserId = (uid) => {
-    return fetch(`${USER_API}/users${uid}`)
+    return fetch(`${USER_API}/users/${uid}`)
         .then(response => response.json())
 }
 
@@ -77,7 +77,7 @@ const createUser = (user) => {
 
 export default {
     registerUser, loginUser, 
-    logoutUser, getCurrentUserProfile, 
+    logoutUser, getCurrentUser, 
     logoutUser, getAllUsers, findUserByUserId,
     deleteUser, updateUser, createUser
 }
