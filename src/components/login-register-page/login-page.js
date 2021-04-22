@@ -14,13 +14,12 @@ const Login = () => {
         userService.loginUser(creds)
             .then((user) => {
                 console.log(user)
-                const userId = user.userId
-                if(user === 0) {
-                    alert("login failed, try again")
-                } else {
-                    history.push(`/profile`)
-                }
-            })
+                .then(response => response.json())
+                .then(existingUser => {
+                    if(existingUser) {
+                        history.push("/profile")
+                    }
+                })
     }
 
     return (
