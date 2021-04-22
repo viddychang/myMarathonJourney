@@ -10,18 +10,16 @@ const Login = () => {
     const history = useHistory();
 
     const login = () => {
-        console.log(creds)
-        userService.loginUser(creds)
+        userService.login(creds)
             .then((user) => {
                 console.log(user)
-                .then(response => response.json())
-                .then(existingUser => {
-                    if(existingUser) {
-                        history.push("/profile")
-                    }
+                if(user === 0) {
+                    alert("login failed, try again")
+                } else {
+                    history.push("/profile")
                 }
-                )
-                })
+            })
+        history.push("/profile")
     }
 
     return (
