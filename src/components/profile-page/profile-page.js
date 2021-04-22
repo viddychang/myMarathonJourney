@@ -23,12 +23,12 @@ const Profile = () => {
     useEffect(() => {
         console.log('hi')
         userService.getCurrentUser()
-        .then((user) => {
-            console.log(user)
-            if (user !== null) {
-                setCurrentLoginUser(user)
-            }
-        })
+            .then((user) => {
+                console.log(user)
+                if (user !== null) {
+                    setCurrentLoginUser(user)
+                }
+            })
         
         userService.findUserByUserId(profileId)
             .then((userData) => {
