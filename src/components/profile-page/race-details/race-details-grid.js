@@ -20,7 +20,7 @@ const RaceDetailsSection = ({profileId,
       )
 
 
-  },[])
+  },[marathons])
 
   return (
     <div>
@@ -33,17 +33,22 @@ const RaceDetailsSection = ({profileId,
     </div>
    
     <div className="row wbdv-padding-sm-right">
-      {  marathons &&  currentLoginUser === otherUser &&
+
+      {  marathons && currentLoginUser && otherUser
+      && currentLoginUser.userId === otherUser.userId &&
         marathons.map(marathon =>
           <RaceDetailCardPrivate race={marathon}
                       raceLogo={marathon.raceLogo}
                       raceTitle={marathon.raceName}
                       raceURL={marathon.raceURL}
-                      raceDate={marathon.raceDate}/>
+                      raceDate={marathon.raceDate}
+                      setMarathons={setMarathons}
+                      profileId={profileId}/>
         )
       }
 
-      { marathons &&  currentLoginUser !== otherUser &&
+      { marathons && currentLoginUser && otherUser &&
+      currentLoginUser.userId !== otherUser.userId &&
         marathons.map(marathon =>
           <RaceDetailCardPublic race={marathon}
                       raceLogo={marathon.raceLogo}

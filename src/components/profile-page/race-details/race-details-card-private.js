@@ -8,7 +8,9 @@ const RaceDetailCardPrivate = (
     raceLogo, 
     raceTitle,
     raceURL,
-    raceDate
+    raceDate,
+    setMarathons,
+    profileId
   }) => {
   const [editing, setEditing] = useState(false)
   const [newTitle, setNewTitle] = useState(raceTitle)
@@ -29,8 +31,14 @@ const RaceDetailCardPrivate = (
 
   const deleteTitle = () => {
       setEditing(false)
-      marathonJourneyService.deleteMarathonJourney(race)
+      marathonJourneyService.deleteMarathonJourney(race.id)
    }
+
+  const updateMarathonList = () => {
+    marathonJourneyService.findMarathonJourneyForUser(profileId)
+      .then((response) => setMarathons(response))
+
+  }
 
   return (
       <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pb-3">
@@ -49,7 +57,7 @@ const RaceDetailCardPrivate = (
                               className="form-control"/></label>
           }
           {
-            editing && <label>Race date:<input onChange={(event) => setNewURL(event.target.value)}
+            editing && <label>Race date:<input onChange={(event) => setNewDate(event.target.value)}
                               value={newDate}
                               className="form-control"/></label>
           }
@@ -74,7 +82,11 @@ const RaceDetailCardPrivate = (
             <div className="float-right">
                 {!editing && <i onClick={() => setEditing(true)} className="fas fa-lg fa-edit color-blue "></i>}
                 {editing && <i onClick={() => saveTitle()} className="fas fa-lg fa-check wbdv-icon-padding text-success"></i>}
-                {editing && <i onClick={() => deleteTitle()} className="fas fa-lg fa-times wbdv-icon-padding text-danger"></i>}
+                {editing && <i onClick={() => {deleteTitle()
+                                              updateMarathonList()
+                                }
+              
+              } className="fas fa-lg fa-times wbdv-icon-padding text-danger"></i>}
             </div>
             
           </div>

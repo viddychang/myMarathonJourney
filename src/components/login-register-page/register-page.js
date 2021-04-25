@@ -11,7 +11,7 @@ const Register = (registerUser) => {
         if (tempPW === creds.password) { 
             
 
-            registerUser(creds)
+            userService.registerUser(creds)
                 .then((user) => {
                     console.log(user)
                     const userId = user.userId

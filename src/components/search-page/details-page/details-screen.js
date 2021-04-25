@@ -4,6 +4,7 @@ import marathonService from '../../../services/marathon-service'
 import marathonJourneyService from '../../../services/marathon-journey-service'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import userService from '../../../services/user-service';
 
 
 const DetailsScreen = () => {
@@ -11,11 +12,13 @@ const DetailsScreen = () => {
     const history = useHistory()
     const [race, setRace] = useState([{}])
     const [marathonJourney, setMarathonJourney] = useState({})
+    const [currentLoginUser, setCurrentLoginUser] = useState()
      
     useEffect(() => {
         // console.log(race_id)
         getMarathonData()
-    }, [currentLoginUser])
+        getCurrentUser()
+    }, [])
     const getMarathonData = () => {
         marathonService.findMarathonById(race_id)
             .then((data) => {
@@ -25,11 +28,17 @@ const DetailsScreen = () => {
             console.log(race)
     }
 
-    const currentLoginUser = undefined;
+    const getCurrentUser = () => {
+        userService.getCurrentUser()
+            .then((user) => {
+                setCurrentLoginUser(user)
+            })
+    }
+
 
     const addToProfile = () => {
         if (race !== null && currentLoginUser !== undefined) {
-            marathonJourneyService.createMarathonJourney(currentLoginUser, {
+            marathonJourneyService.createMarathonJourney(currentLoginUser.userId, {
                 ...marathonJourney,
                 raceId: race.race_id,
                 raceName: race.name,

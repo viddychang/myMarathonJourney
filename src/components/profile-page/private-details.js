@@ -216,11 +216,12 @@ const PrivateDetails = ({
                 <button className="btn btn-success btn-block" onClick={updateUserInfo}>
                     Update
                 </button>
-                <ToastContainer />
-                
                 <button className="btn btn-danger btn-block" onClick={logUserOut}>
                     Log out
                 </button>
+                <ToastContainer />
+                
+
             </div>
 
         </div>

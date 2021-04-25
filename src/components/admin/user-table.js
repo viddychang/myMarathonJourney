@@ -9,7 +9,7 @@ const AdminContentTable = () => {
 
     useEffect(() => {
         getUsers()
-    }, [])
+    }, [results])
 
     const getUsers = () => {
         userService.getAllUsers()
