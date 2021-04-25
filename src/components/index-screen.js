@@ -1,10 +1,10 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 
-const HomeScreen = () => {
+const IndexScreen = () => {
     return(
-        <div>
-            <h2>Home Screen</h2>
+        <div className="wbdv-padding-60">
+            <h2>Index</h2>
             <Link to="/search">
                 Search
             </Link>
@@ -24,8 +24,12 @@ const HomeScreen = () => {
             <Link to="/profile">
                 Profile
             </Link>
+            <br/>
+            <Link to="/admin-view">
+                Admin view
+            </Link>
         </div>
     )
 }
 
-export default HomeScreen
+export default IndexScreen

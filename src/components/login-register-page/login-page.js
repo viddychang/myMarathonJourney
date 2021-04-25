@@ -3,6 +3,9 @@ import {Link, useHistory} from "react-router-dom";
 import '../styles.css';
 import './login.style.client.css';
 import userService from '../../services/user-service';
+import {connect} from 'react-redux'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Login = () => {
@@ -13,17 +16,27 @@ const Login = () => {
         userService.loginUser(creds)
             .then((user) => {
                 console.log(user)
-                if(user === 0) {
+                if(user === undefined) {
                     alert("login failed, try again")
                 } else {
-                    history.push("/profile")
+                    console.log(user.userId)
+                    history.push(`/profile/${user.userId}`)
                 }
             })
-        history.push("/profile")
+
+            toast.error("Sign in failed. Please try again later.", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
     }
 
     return (
-    <div className="container">
+    <div className="container wbdv-padding-60">
         <h1>Sign In</h1>
             <div className="form-group row">
                 <label for="username" className="col-sm-2 col-form-label">
@@ -48,10 +61,11 @@ const Login = () => {
                 <label className="col-sm-2 col-form-label"></label>
                 <div className="col-sm-10">
                     <button className="btn btn-primary btn-block" onClick={login}>Sign in</button>
-                    <button className="btn btn-danger btn-block" formaction="/home">Cancel</button>
+                    <button className="btn btn-danger btn-block" onClick={() => history.push('/')}>Cancel</button>
+
+                    <ToastContainer/>
                     <div className="row">
                         <div className="col-6">
-                            <Link to={"#"}>Forgot Password?</Link>
                         </div>
                         <div className="col-6">
                             <Link to={"/register"} className="float-right">Sign up</Link>
@@ -65,4 +79,7 @@ const Login = () => {
     )
 
 }
-export default Login;
+
+
+
+export default Login

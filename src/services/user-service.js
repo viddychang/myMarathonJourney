@@ -1,9 +1,10 @@
 const USER_API = "https://wbdv-sp21-dc-project-server.herokuapp.com/api";
+// const USER_API = 'http://localhost:8080/api'
 
 const getCurrentUser = () => {
     return fetch(`${USER_API}/users/profile`, {
         method: "GET",
-        credentials: "include",
+        credentials: 'include',
         headers: {
             'content-type': 'application/json'
         }
@@ -18,8 +19,7 @@ const loginUser = (credentials) => {
         headers: {
             'content-type': 'application/json'
         }
-    })
-        .then(response => response.json())
+    }).then(response => response.json())
 }
 
 const registerUser = (credentials) => {
@@ -34,9 +34,16 @@ const registerUser = (credentials) => {
         .then(response => response.json())
 }
 
-const logoutUser = () => {
-    return fetch(`${USER_API}/session/invalidate`)
+const getUsersByUsername = (userName) => {
+    return fetch(`${USER_API}/users/username?name=${userName}`)
         .then(response => response.json())
+}
+
+const logoutUser = () => {
+    return fetch(`${USER_API}/session/logout`, {
+        method: "POST",
+        credentials: "include"
+    })
 }
 
 const getAllUsers = () => {
@@ -82,5 +89,5 @@ export default {
     registerUser, loginUser, 
     logoutUser, getCurrentUser, 
     logoutUser, getAllUsers, findUserByUserId,
-    deleteUser, updateUser, createUser
+    deleteUser, updateUser, createUser, getUsersByUsername
 }

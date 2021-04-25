@@ -5,12 +5,15 @@ import userService from '../../services/user-service'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PrivateDetails from './private-details';
+import RaceDetailsSection from './race-details/race-details-grid';
+import PublicDetails from './public-details';
 
 
 const Profile = () => {
     const {profileId} = useParams()
     const [privateMode, setPrivateMode] = useState()
     const [currentLoginUser, setCurrentLoginUser] = useState()
+    const [otherUser, setOtherUser] = useState(null)
 
     const [userName, setUserName] = useState()
     const [userBio, setUserBio] = useState()
@@ -19,16 +22,15 @@ const Profile = () => {
     const [lastName, setLastName] = useState()
     const [dOB, setDOB] = useState()
     const [role, setRole] = useState()
+    const [homeCity, setHomeCity] = useState()
 
     useEffect(() => {
-        console.log('hi')
+        /// console.log('hi')
+        
         userService.getCurrentUser()
-            .then(response => response.json())
-
             .catch(error => {
                 console.log(error);
             })
-            
             .then((user) => {
                 console.log(user)
                 if (user !== null) {
@@ -38,7 +40,7 @@ const Profile = () => {
         
         userService.findUserByUserId(profileId)
             .then((userData) => {
-                console.log(userData)
+                // console.log(userData)
                 setUserName(userData.userName)
                 setPassword(userData.password)
                 setFirstName(userData.firstName)
@@ -46,34 +48,59 @@ const Profile = () => {
                 setDOB(userData.dateOfBirth)
                 setUserBio(userData.userBiography)
                 setRole(userData.role)
+                setOtherUser(userData)
+                setHomeCity(userData.homeCity)
             })
+            console.log(otherUser)
+            // console.log(currentLoginUser)
     }, [profileId])
 
     return(
     <div class="container">
         <h1>{userName}'s Marathon Journey</h1>
-        <div >
+        <div class="container">
             {
-        currentLoginUser !== undefined && currentLoginUser.userId === profileId &&
-        <PrivateDetails 
-            userName={userName}
-            password={password}
-            userBio={userBio}
-            firstName={firstName}
-            lastName={lastName}
-            role={role}
-            dOB={dOB}
-            setDOB={setDOB}
-            setPassword={setPassword}
-            setUserBio={setUserBio}
-            setFirstName={setFirstName}
-            setLastName={setLastName}
-            setRole={setRole}
-            profileId={profileId}
-            currentLoginUser={currentLoginUser}
-            
-            />
-        } 
+                currentLoginUser && otherUser && currentLoginUser.userId === otherUser.userId &&
+                <PrivateDetails 
+                    userName={userName}
+                    password={password}
+                    userBio={userBio}
+                    firstName={firstName}
+                    lastName={lastName}
+                    role={role}
+                    dOB={dOB}
+                    setDOB={setDOB}
+                    setPassword={setPassword}
+                    setUserBio={setUserBio}
+                    setFirstName={setFirstName}
+                    setLastName={setLastName}
+                    setRole={setRole}
+                    profileId={profileId}
+                    currentLoginUser={currentLoginUser}
+                    homeCity={homeCity}
+                    setHomeCity={setHomeCity}
+                    
+                    />
+                } 
+            {
+                otherUser &&
+                <PublicDetails
+                    firstName={firstName}
+                    lastName={lastName}
+                    userBio={userBio}
+                
+                />
+            }
+        <div>
+            <RaceDetailsSection 
+                profileId={profileId}
+                currentLoginUser={currentLoginUser}
+                otherUser={otherUser}
+                homeCity={homeCity}
+
+                
+                />
+        </div>
             </div>
             
     </div>

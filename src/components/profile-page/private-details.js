@@ -1,6 +1,7 @@
 import { ToastContainer, toast } from 'react-toastify';
-import React, { useEffect, useState } from 'react'
-import userService from '../../services/user-service'
+import React, { useEffect, useState } from 'react';
+import userService from '../../services/user-service';
+import {Link, useHistory} from "react-router-dom";
 
 
 
@@ -9,13 +10,13 @@ const PrivateDetails = ({
     emailAddress, setEmailAddress,
     role, setRole, userBio, setUserBio, 
     firstName, setFirstName, lastName, setLastName,
-    dOB, setDOB, profileId, currentLoginUser
+    dOB, setDOB, profileId, currentLoginUser, homeCity,
+    setHomeCity
 }) => {
 
+    const history = useHistory()
 
     const updateUserInfo = () => {
-
-
         userService.updateUser(profileId, 
             {...currentLoginUser,
                 password: password,
@@ -50,13 +51,42 @@ const PrivateDetails = ({
         }
             
         )
-
-
     }
 
-    console.log(firstName)
+
+    const logUserOut = () => {
+        userService.logoutUser()
+            .then((response) => {
+                console.log(response)
+                if (response !== null) {
+                    toast.success("Successfully logged out!", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    })
+                    history.push(`/home`)
+                }
+                else {
+                    toast.error("Something went wrong. Please try again later.", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    })
+                }
+            })
+    }
+
+    // console.log(firstName)
     return (
-        <div>
+        <div className="wbdv-padding-60">
         <div class="mb-3 row">
             <label for="username"
                    class="col-sm-2 col-form-label">
@@ -93,7 +123,9 @@ const PrivateDetails = ({
             <div class="col-sm-10">
                 <input type="email"
                        class="form-control"
-                       id="email"/>
+                       id="email"
+                       value={emailAddress}
+                       onChange={(event => setEmailAddress(event.target.value))}/>
             </div>
         </div>
 
@@ -125,6 +157,19 @@ const PrivateDetails = ({
         </div>
 
         <div class="mb-3 row">
+            <label for="home-city" class="col-sm-2 col-form-label">
+                Home City
+            </label>
+            <div class="col-sm-10">
+                <input type="text"
+                       class="form-control"
+                       id="home-city"
+                       value={homeCity}
+                       onChange={(event => setHomeCity(event.target.value))}/>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
             <label for="userBio" class="col-sm-2 col-form-label">
                 User Bio
             </label>
@@ -136,7 +181,6 @@ const PrivateDetails = ({
                        onChange={(event => setUserBio(event.target.value))}/>
             </div>
         </div>
-
 
         <div class="mb-3 row">
             <label for="role" class="col-sm-2 col-form-label">
@@ -173,7 +217,12 @@ const PrivateDetails = ({
                     Update
                 </button>
                 <ToastContainer />
+                
+                <button className="btn btn-danger btn-block" onClick={logUserOut}>
+                    Log out
+                </button>
             </div>
+
         </div>
         </div>
     )
