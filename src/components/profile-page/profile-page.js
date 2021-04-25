@@ -56,7 +56,7 @@ const Profile = () => {
     }, [profileId])
 
     return(
-    <div class="container">
+    <div class="container wbdv-padding-60">
         <h1>{userName}'s Marathon Journey</h1>
         <div class="container">
             {
@@ -83,7 +83,7 @@ const Profile = () => {
                     />
                 } 
             {
-                otherUser &&
+                otherUser && currentLoginUser && otherUser.userId !== currentLoginUser.userId &&
                 <PublicDetails
                     firstName={firstName}
                     lastName={lastName}
