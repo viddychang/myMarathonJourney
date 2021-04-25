@@ -1,25 +1,24 @@
 import React, {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
 import userService from '../../services/user-service'
+import {connect} from 'react-redux'
 
-const Register = () => {
+const Register = (registerUser) => {
     const [creds, setCreds] = useState({userName: '', password: '', role: 'COMMUNITY'}) 
     const [tempPW, setTempPW] = useState('');
     const history = useHistory()
     const register = () => {
-        console.log(creds)
         if (tempPW === creds.password) { 
             
 
-            userService.registerUser(creds)
+            registerUser(creds)
                 .then((user) => {
                     console.log(user)
                     const userId = user.userId
                     if(user === 0) {
                         alert("username already taken")
                     } else {
-                        
-                        userService.loginUser()
+                    
                         history.push(`/profile/${userId}`)
                     }
                 })
@@ -41,7 +40,7 @@ const Register = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container wbdv-padding-60">
             <h1>New User Registration</h1>
             
                 <div className="form-group row">
@@ -90,7 +89,7 @@ const Register = () => {
                     <label className="col-sm-2 col-form-label"></label>
                     <div className="col-sm-10">
                         <button className="btn btn-primary btn-block" onClick={register}>Sign Up</button>
-                        <button className="btn btn-danger btn-block" formaction={"/"}>Cancel</button>
+                        <button className="btn btn-danger btn-block" onClick={() => {history.push("/")}}>Cancel</button>
                     </div>
                 </div>
             
@@ -100,4 +99,40 @@ const Register = () => {
 
 
 }
-export default Register;
+const stpm = (state) => ({
+    currentUser: state.userReducer.currentUser
+})
+
+const dtpm = (dispatch) => ({
+
+    createUser: (user) =>
+        userService.createUser(user)
+            .then(user => dispatch({
+                type: "CREATE_USER",
+                user: user
+            })),
+
+    userLogin: (credentials) =>
+        userService.loginUser(credentials)
+            .then(user => dispatch({
+                type: "LOGIN_USER",
+                user: user
+            })),
+
+    registerUser: (user) =>
+        userService.registerUser(user)
+            .then(user => dispatch({
+                type: "REGISTER_USER",
+                user: user
+            })),
+
+    getCurrentUser: () =>
+        userService.getCurrentUser()
+            .then(user => dispatch({
+                type: "CURRENT_USER",
+                user: user
+            }))
+}
+)
+
+export default connect(stpm, dtpm)(Register)

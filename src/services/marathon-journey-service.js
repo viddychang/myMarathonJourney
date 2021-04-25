@@ -1,4 +1,6 @@
-const MARATHON_JOURNEY_URL = process.env.REACT_APP_WIDGET_URL
+const MARATHON_JOURNEY_URL = "https://wbdv-sp21-dc-project-server.herokuapp.com/api";
+// const MARATHON_JOURNEY_URL = 'http://localhost:8080/api'
+
 
 export const createMarathonJourney = (uid, raceJourney) =>
     fetch(`${MARATHON_JOURNEY_URL}/users/${uid}/raceJourneys`, {
