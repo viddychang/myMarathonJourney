@@ -51,7 +51,7 @@ const Profile = () => {
                 setOtherUser(userData)
                 setHomeCity(userData.homeCity)
             })
-            console.log(otherUser)
+            // console.log(otherUser)
             // console.log(currentLoginUser)
     }, [profileId])
 

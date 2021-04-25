@@ -24,6 +24,7 @@ const PrivateDetails = ({
                 dateOfBirth: dOB,
                 firstName: firstName,
                 lastName: lastName,
+                homeCity: homeCity
         }).then((user) => {
             // console.log("hi")
             if (user === 1) {
@@ -187,10 +188,8 @@ const PrivateDetails = ({
                 Role
             </label>
             <div class="col-sm-10">
-                <select id="role" class="form-control" placeholder={role} disabled>
-                    <option value="COMMUNITY">Community</option>
-                    <option value="ADMINISTRATOR">Administrator</option>
-                </select>
+                <input type="text" id="role" class="form-control" value={role} disabled>
+                </input>
             </div>
         </div>
 
