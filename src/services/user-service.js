@@ -1,10 +1,10 @@
-const USER_API = "https://wbdv-sp21-dc-project-server.herokuapp.com/api";
+const USER_API = "http://wbdv-sp21-dc-project-server.herokuapp.com/api";
 // const USER_API = 'http://localhost:8080/api'
 
 const getCurrentUser = () => {
     return fetch(`${USER_API}/users/profile`, {
-        method: "GET",
-        credentials: 'include',
+        method: "POST",
+        credentials: "include",
         headers: {
             'content-type': 'application/json'
         }

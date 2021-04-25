@@ -23,16 +23,17 @@ const Login = () => {
                     history.push(`/profile/${user.userId}`)
                 }
             })
-
-            toast.error("Sign in failed. Please try again later.", {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            })
+            .then(userService.getCurrentUser().then((user)=> console.log(user)))
+            .then(
+                toast.error("Sign in failed. Please try again later.", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                }))
     }
 
     return (

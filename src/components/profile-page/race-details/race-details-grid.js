@@ -20,7 +20,7 @@ const RaceDetailsSection = ({profileId,
       )
 
 
-  },[marathons])
+  },[])
 
   return (
     <div>

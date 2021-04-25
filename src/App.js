@@ -34,7 +34,7 @@ function App() {
                    <NavBar/>
                     <IndexScreen/>
                 </Route>
-                <Route path={["/search", "/search/:race"]}
+                <Route path={["/search", "/search/:search_term"]}
                     exact={true}>
                        <NavBar/> 
                     <SearchScreen/>

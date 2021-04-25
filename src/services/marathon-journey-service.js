@@ -1,4 +1,4 @@
-const MARATHON_JOURNEY_URL = "https://wbdv-sp21-dc-project-server.herokuapp.com/api";
+const MARATHON_JOURNEY_URL = "http://wbdv-sp21-dc-project-server.herokuapp.com/api";
 // const MARATHON_JOURNEY_URL = 'http://localhost:8080/api'
 
 

@@ -5,17 +5,32 @@ import userService from "../../services/user-service";
 
 const SearchScreen = () => {
     const history = useHistory()
-    const {race} = useParams()
+    const {search_term} = useParams()
     const [searchCriteria, setSearchCriteria] = useState('name')
-    const [searchRace, setSearchRace] = useState(race)
+    const [searchRace, setSearchRace] = useState(search_term)
     const [results, setResults] = useState()
     const [nameTabActive, setNameTabActive] = useState("active")
     const [stateTabActive, setStateTabActive] = useState("")
     const [userTabActive, setUserTabActive] = useState("")
     const [users, setUsers] = useState()
 
+    useEffect(() => {
+        if (nameTabActive === 'active') {
+            findMarathonsByName(search_term)
+        }
+        if (stateTabActive === 'active') {
+            findMarathonsByState(search_term)
+        }
+        if (userTabActive === 'active') {
+            findUsersByName(search_term)
+        }
+    }, [])
+
     const findMarathonsByName = (raceName) => {
-        // history.push(raceName, [])
+        history.push({
+            pathname: `/search/${raceName}`
+        })
+
         marathonService.findMarathonsByName(raceName)
             .then((results) => {
                 setResults(results)
@@ -25,6 +40,10 @@ const SearchScreen = () => {
 
 
     const findMarathonsByState = (st) => {
+        history.push({
+            pathname: `/search/${st}`
+        })
+
         marathonService.findMarathonsByState(st)
         .then((results) => {
             setResults(results)
@@ -32,6 +51,10 @@ const SearchScreen = () => {
     }
 
     const findUsersByName = (user) => {
+        history.push({
+            pathname: `/search/${user}`
+        })
+        
         userService.getUsersByUsername(user)
             .then((response) => {
                 setUsers(response)
