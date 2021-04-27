@@ -86,7 +86,7 @@ const Profile = () => {
                     />
                 } 
             {
-                otherUser && currentLoginUser && otherUser.userId !== currentLoginUser.userId &&
+                otherUser && otherUser.userId !== currentLoginUser.userId &&
                 <PublicDetails
                     firstName={firstName}
                     lastName={lastName}
