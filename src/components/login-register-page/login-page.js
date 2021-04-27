@@ -24,7 +24,7 @@ const Login = () => {
                 }
             })
             .then(userService.getCurrentUser().then((user)=> console.log(user)))
-            .then(
+            .catch(
                 toast.error("Sign in failed. Please try again later.", {
                     position: "top-center",
                     autoClose: 5000,
