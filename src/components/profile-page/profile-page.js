@@ -14,7 +14,7 @@ const Profile = () => {
     const [privateMode, setPrivateMode] = useState()
     const [currentLoginUser, setCurrentLoginUser] = useState()
     const [otherUser, setOtherUser] = useState(null)
-
+    const [emailAddress, setEmailAddress] = useState()
     const [userName, setUserName] = useState()
     const [userBio, setUserBio] = useState()
     const [password, setPassword] = useState()
@@ -50,6 +50,7 @@ const Profile = () => {
                 setRole(userData.role)
                 setOtherUser(userData)
                 setHomeCity(userData.homeCity)
+                setEmailAddress(userData.emailAddress)
             })
             // console.log(otherUser)
             // console.log(currentLoginUser)
@@ -79,6 +80,8 @@ const Profile = () => {
                     currentLoginUser={currentLoginUser}
                     homeCity={homeCity}
                     setHomeCity={setHomeCity}
+                    emailAddress={emailAddress}
+                    setEmailAddress={setEmailAddress}
                     
                     />
                 } 
