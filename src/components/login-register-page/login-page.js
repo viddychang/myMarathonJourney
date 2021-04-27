@@ -15,15 +15,23 @@ const Login = () => {
     const login = () => {
         userService.loginUser(creds)
             .then((user) => {
-                console.log(user)
-                if(user === undefined) {
-                    alert("login failed, try again")
-                } else {
-                    console.log(user.userId)
+                console.log(user.userId)
+                if(user.userId !== undefined) {
+                    // console.log(user.userId)
                     history.push(`/profile/${user.userId}`)
+
+                } else {
+                    toast.error("Sign in failed. Please try again later.", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    })
                 }
             })
-            .then(userService.getCurrentUser().then((user)=> console.log(user)))
             .catch(
                 toast.error("Sign in failed. Please try again later.", {
                     position: "top-center",

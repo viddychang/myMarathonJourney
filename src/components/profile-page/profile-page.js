@@ -86,11 +86,13 @@ const Profile = () => {
                     />
                 } 
             {
-                otherUser && otherUser.userId !== currentLoginUser.userId &&
+                otherUser && !currentLoginUser &&
                 <PublicDetails
                     firstName={firstName}
                     lastName={lastName}
                     userBio={userBio}
+                    homeCity={homeCity}
+
                 
                 />
             }
@@ -99,7 +101,6 @@ const Profile = () => {
                 profileId={profileId}
                 currentLoginUser={currentLoginUser}
                 otherUser={otherUser}
-                homeCity={homeCity}
 
                 
                 />
