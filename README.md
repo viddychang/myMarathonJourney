@@ -19,7 +19,7 @@ Non-registered users can also use the application, but will not be able to make 
 One of the features of the application will be for a user to search for marathon races. The search will be by keyword and will query the API service provided by runSignup - https://runsignup.com/API/races/GET. An additional search feature may be to search by month, state, and/or country.
 
 #### UML:
-![UML](https://github.com/viddychang/myMarathonJourney/blob/main/uml.png)
+![UML](https://github.com/viddychang/myMarathonJourney/blob/main/uml-1.png)
 
 #### Production:
 This app can be used via https://my-marathon-journey.herokuapp.com/.
