@@ -16,11 +16,13 @@ const PublicDetails = ({
             <h3>{firstName} {lastName}</h3> 
             </div>
             <div class="mb-3 row">
-            <h6>{homeCity}</h6> 
-            <p>{userBio}</p> 
+            <h6>{homeCity}</h6>
 
             </div>
-
+            <div class="mb-3 row">
+        
+            <p>{userBio}</p> 
+            </div>
         </div>
 
     )
