@@ -77,7 +77,7 @@ const RaceDetailsSection = ({profileId,
         )
       }
 
-      { marathons && !currentLoginUser && otherUser &&
+      { marathons && otherUser &&
         marathons.map(marathon =>
           <RaceDetailCardPublic race={marathon}
                       raceLogo={marathon.raceLogo}
