@@ -24,7 +24,7 @@ const Login = () => {
 
                 }
             })
-                if (user === undefined) {
+            if (user && user === undefined) {
                 toast.error("Sign in failed. Please try again later.", {
                     position: "top-center",
                     autoClose: 5000,
