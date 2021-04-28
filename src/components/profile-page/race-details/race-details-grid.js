@@ -11,6 +11,12 @@ const RaceDetailsSection = ({profileId,
                               
   const [marathons, setMarathons] = useState()
 
+  const updateMarathonList = () => {
+    marathonJourneyService.findMarathonJourneyForUser(profileId)
+      .then((response) => setMarathons(response))
+
+  }
+
   useEffect(() => {
     marathonJourneyService.findMarathonJourneyForUser(profileId)
       .then(
@@ -29,9 +35,33 @@ const RaceDetailsSection = ({profileId,
         <h4>
           Marathon Tick List
         </h4> 
+
+        {
+      marathons && currentLoginUser && otherUser
+      && currentLoginUser.userId === otherUser.userId && 
+      
+      <button className="btn btn-primary" onClick={ () => {
+        marathonJourneyService.createMarathonJourney(currentLoginUser.userId, {
+          raceId: null,
+          raceName: "Custom race",
+          raceURL: "example.com",
+          raceLogo: "https://f.hubspotusercontent20.net/hubfs/2482872/bd2da3b952fb872954bdd459cfc7b99e.jpg",
+          raceDate: 'mm/dd/yyyy',
+        })
+        updateMarathonList()
+        }}>
+        Add a Journey
+      </button>
+    }
+
+        
       </div>
     </div>
-   
+    
+    {
+      marathons && currentLoginUser && otherUser
+      && currentLoginUser.userId === otherUser.userId && <br/>
+    }
     <div className="row wbdv-padding-sm-right">
 
       {  marathons && currentLoginUser && otherUser
