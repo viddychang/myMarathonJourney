@@ -40,7 +40,7 @@ const Profile = () => {
         
         userService.findUserByUserId(profileId)
             .then((userData) => {
-                // console.log(userData)
+                console.log(userData)
                 setUserName(userData.userName)
                 setPassword(userData.password)
                 setFirstName(userData.firstName)
@@ -86,7 +86,9 @@ const Profile = () => {
                     />
                 } 
             {
-                otherUser && !currentLoginUser &&
+                ((otherUser && !currentLoginUser) ||
+                (currentLoginUser && currentLoginUser.userId !== profileId))
+                &&
                 <PublicDetails
                     firstName={firstName}
                     lastName={lastName}
