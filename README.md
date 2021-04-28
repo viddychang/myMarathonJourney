@@ -17,3 +17,6 @@ Non-registered users can also use the application, but will not be able to make 
 
 #### WebAPI:
 One of the features of the application will be for a user to search for marathon races. The search will be by keyword and will query the API service provided by runSignup - https://runsignup.com/API/races/GET. An additional search feature may be to search by month, state, and/or country.
+
+#### Heroku application:
+This app can be used via https://my-marathon-journey.herokuapp.com/.
