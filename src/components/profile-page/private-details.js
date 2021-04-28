@@ -24,7 +24,8 @@ const PrivateDetails = ({
                 dateOfBirth: dOB,
                 firstName: firstName,
                 lastName: lastName,
-                homeCity: homeCity
+                homeCity: homeCity,
+                emailAddress: emailAddress,
         }).then((user) => {
             // console.log("hi")
             if (user === 1) {
