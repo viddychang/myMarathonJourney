@@ -88,6 +88,11 @@ const DetailsScreen = () => {
             <button onClick={()=>{history.goBack()}} className="btn btn-primary">Back to Search</button>
             &nbsp;
             <button onClick={()=>{addToProfile()}} className="btn btn-primary">Add to profile</button>
+            &nbsp;
+            <a href={`${race.url}`}>
+                 <button className="btn btn-primary">Link to Race Site</button>
+            </a>
+
             <ToastContainer/>
             <h2>{race.name}</h2>
             <div>
@@ -101,6 +106,7 @@ const DetailsScreen = () => {
                 race.description.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, '')}
             </p>
 
+            
             {/* {JSON.stringify(race)} */}
 
         </div>
