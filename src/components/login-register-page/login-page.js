@@ -10,11 +10,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const [creds, setCreds] = useState({userName: '', password:''});
+    const [user, setUser] = useState()
     const history = useHistory();
 
     const login = () => {
         userService.loginUser(creds)
             .then((user) => {
+                setUser(user)
                 console.log(user.userId)
                 if(user.userId !== undefined) {
                     // console.log(user.userId)
@@ -22,7 +24,7 @@ const Login = () => {
 
                 }
             })
-            .catch(
+                if (user === undefined) {
                 toast.error("Sign in failed. Please try again later.", {
                     position: "top-center",
                     autoClose: 5000,
@@ -31,7 +33,7 @@ const Login = () => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                }))
+                })}
     }
 
     return (
